@@ -1,0 +1,279 @@
+<resources>
+    <string name="app_name">Calendar</string>
+
+    <array name="day">
+        <item>Day</item>
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4"</item>
+        <item>"5"</item>
+        <item>"6"</item>
+        <item>"7"</item>
+        <item>"8"</item>
+        <item>"9"</item>
+        <item>"10"</item>
+        <item>"11"</item>
+        <item>"12"</item>
+        <item>"13"</item>
+        <item>"14"</item>
+        <item>"15"</item>
+        <item>"16"</item>
+        <item>"17"</item>
+        <item>"18"</item>
+        <item>"19"</item>
+        <item>"20"</item>
+        <item>"21"</item>
+        <item>"22"</item>
+        <item>"23"</item>
+        <item>"24"</item>
+        <item>"25"</item>
+        <item>"26"</item>
+        <item>"27"</item>
+        <item>"28"</item>
+        <item>"29"</item>
+        <item>"30"</item>
+        <item>"31"</item>
+    </array>
+
+    <array name="month">
+        <item>Month</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </array>
+
+    <array name="year">
+        <item>Year</item>
+        <item>"2020"</item>
+        <item>"2019"</item>
+        <item>"2018"</item>
+        <item>"2017"</item>
+        <item>"2016"</item>
+        <item>"2015"</item>
+        <item>"2014"</item>
+        <item>"2013"</item>
+        <item>"2012"</item>
+        <item>"2011"</item>
+        <item>"2010"</item>
+        <item>"2009"</item>
+        <item>"2008"</item>
+        <item>"2007"</item>
+        <item>"2006"</item>
+        <item>"2005"</item>
+        <item>"2004"</item>
+        <item>"2003"</item>
+        <item>"2002"</item>
+        <item>"2001"</item>
+        <item>"2000"</item>
+        <item>"1999"</item>
+        <item>"1998"</item>
+        <item>"1997"</item>
+        <item>"1996"</item>
+        <item>"1995"</item>
+        <item>"1994"</item>
+        <item>"1993"</item>
+        <item>"1992"</item>
+        <item>"1991"</item>
+        <item>"1990"</item>
+        <item>"1989"</item>
+        <item>"1988"</item>
+        <item>"1987"</item>
+        <item>"1986"</item>
+        <item>"1985"</item>
+        <item>"1984"</item>
+        <item>"1983"</item>
+        <item>"1982"</item>
+        <item>"1981"</item>
+        <item>"1980"</item>
+        <item>"1979"</item>
+        <item>"1978"</item>
+        <item>"1977"</item>
+        <item>"1976"</item>
+        <item>"1975"</item>
+        <item>"1974"</item>
+        <item>"1973"</item>
+        <item>"1972"</item>
+        <item>"1971"</item>
+        <item>"1970"</item>
+        <item>"1969"</item>
+        <item>"1968"</item>
+        <item>"1967"</item>
+        <item>"1966"</item>
+        <item>"1965"</item>
+        <item>"1964"</item>
+        <item>"1963"</item>
+        <item>"1962"</item>
+        <item>"1961"</item>
+        <item>"1960"</item>
+        <item>"1959"</item>
+        <item>"1958"</item>
+        <item>"1957"</item>
+        <item>"1956"</item>
+        <item>"1955"</item>
+        <item>"1954"</item>
+        <item>"1953"</item>
+        <item>"1952"</item>
+        <item>"1951"</item>
+        <item>"1950'</item>
+    </array>
+
+    <array name="group">
+        <item>About Developer</item>
+        <item>Contact</item>
+        <item>Bangla Calendar</item>
+        <item>Arabic Calendar</item>
+        <item>English Calendar</item>
+        <item>Age Calculator</item>
+        <item>Date Converter</item>
+        <item>Share App</item>
+        <item>FeedBack</item>
+    </array>
+
+    <array name="child">
+        <item>
+            Initiator:\n
+            Md. Niyajul Islam\n
+            B.Sc. Manda Govt. College\n\n
+            Design and Development:\n
+            Mustak Ahmmed\n
+            CSE-16, JUST.
+        </item>
+        <item>
+            For more needed app please contact with us-\n
+            Email: rnniyajul@gmail.com (Initiator)\n
+            Email: rmmostak@gmail.com (Developer)\n
+        </item>
+        <item>
+            New Bengali Calendar\n
+            BDNews24.com 17 October 2019, 00:00:00 | Print Edition\n
+
+            Mubarak Hossain, director (research, compilation and dictionary and encyclopedia
+            department)
+            of the Bangla Academy, said that under the old rules, the five months from Boishakh to
+            Bhadra
+            were counted in 31 days. And from Ashwin to Chaitra- seven months would be 30 days.
+            However, in the English leap year, the month of Falgun was 31 days long. Now under the
+            new rules,
+            the first six months from Boishakh to Ashwin will be 31 days. Kartik, Agrahayan, Poush,
+            Magh and Chaitra -
+            these 5 months will be calculated in 30 days. And the month of Falgun will be calculated
+            in 29 days.
+            The year of the English leap year will increase by one day and the month of Falgun will
+            be 30 days.
+            <!--নতুন বাংলা বর্ষপঞ্জি
+            বিডিনিউজ টোয়েন্টিফোর ডটকম ১৭ অক্টোবর ২০১৯, ০০:০০:০০ | প্রিন্ট সংস্করণ\n
+            বাংলা একাডেমির পরিচালক (গবেষণা, সংকলন এবং অভিধান ও বিশ্বকোষ বিভাগ) মোবারক হোসেন বলেন,
+            পুরনো নিয়মে বৈশাখ থেকে ভাদ্র- এই পাঁচ মাস গণনা করা হতো ৩১ দিনে। আর আশ্বিন থেকে চৈত্র- সাত মাস হতো ৩০ দিনে।
+            তবে ইংরেজি লিপইয়ারে ফাল্গুন মাস ৩১ দিনে হতো। এখন নতুন নিয়মে বৈশাখ থেকে আশ্বিন- প্রথম ছয় মাস ৩১ দিনে হবে। কার্তিক,
+             অগ্রহায়ণ, পৌষ, মাঘ ও চৈত্র- এই ৫ মাস হিসাব করা হবে ৩০ দিনে। আর ফাল্গুন মাস হিসাব করা হবে ২৯ দিনে।
+              ইংরেজি লিপইয়ারের বছর এক দিন বেড়ে ফাল্গুন হবে ৩০ দিনের মাস।\n\n
+            -->
+        </item>
+        <item>
+            The Islamic calendar is of great significance in the Muslim world and is considerably
+            different from the Christian calendars used throughout the western world.
+            The Islamic calendar begins with one of the most iconic events in Islamic history;
+            Prophet Muhammad’s (PBUH) ‘Hijra’- the day he emigrated" from Makkah to Madina to set up
+            his new social order. To this day, Muslims date everything starting from that migration
+            nearly 1435 years ago.\n
+            The month of Muharram marks the commencement of the new Islamic year. The Islamic
+            calendar was introduced by Hazrat Umar bin Al Khattab, the second Caliph of Islam and
+            one of the closest companions of our Prophet Muhammad (PBUH), in 638 Christian Era (CE).
+            The introduction of the calendar was rooted in the endeavour of rationalising multiple,
+            at times conflicting, dating systems being used during that time period.\n
+            It is usually abbreviated as ‘AH’ in Western languages and Muharram 1, 1 AH, is
+            representative of the date July 15, 622CE, corresponding to the date of the Hijra. The
+            migration eventually led to the foundation of the first Muslim city, which itself became
+            a turning point in not only Islamic history but world history.\n
+            For Muslims, the Islamic calendar doesn’t just hold sentimental significance of time
+            computation and marking of important religious events, e.g. fasting and Hajj, but it
+            holds a much deeper religious and historical meaning. All the historical events in
+            Islamic history that are dated in the Islamic calendar, serve as a reminder of the
+            sacrifices made in the way of Islam, especially during the time of the Prophet (PBUH).
+            The lessons and meaning of these events are somewhat lost in the Gregorian calculations,
+            hence Muslims use the Hijra calendar.\n
+            An Islamic year has twelve months in total which are as follows:\n
+            As opposed to the Christian calendar which is based on solar cycles, the Islamic
+            Calendar is purely lunar and is shorter than the Gregorian calendar by 11 days. This is
+            because the Islamic year is not dependent on seasons or weather conditions.\n
+            According to our Islamic calendar, the next day commences from the time of Maghrib or
+            sunset of each day, whereas for solar calendars, a new day starts at 12:00 am each
+            night. This is one of the major differences between the calendars. The start of each
+            Hijra month is marked by the physical sighting of the crescent moon at a given point on
+            the globe.\n
+            Moreover, Muharram, Rajab, Dhul-Qadah, and Dhul-Hijjah are considered sacred months. In
+            traditional Arab culture, these four months were known as the “forbidden months: where
+            fighting was prohibited and battles were suspended in order to allow trade and peace.\n
+            Islamic calendar is considered the official calendar in various Muslim countries around
+            the world, especially countries like Saudi Arabia. Other Muslim countries make use of
+            the Gregorian calendar for civic purposes and turn to the Islamic calendar for matters
+            pertaining to religion. All in all, the Islamic calendar holds immense importance in
+            every Muslim’s life and we will do well to understand its significance.\n
+            Link: https://www.islamicfinder.org/news/the-history-and-importance-of-islamic-calendar/
+        </item>
+        <item>English Calendar\n
+            The Gregorian calendar is today\'s internationally accepted civil calendar and is also
+            known as the Western or Christian calendar.\n
+            Before today\’s Gregorian calendar was adopted, the older Julian calendar was used. It
+            was admirably close to the actual length of the year, as it turns out, but the Julian
+            calendar was not so perfect that it did not slowly shift off track over the following
+            centuries. But, hundreds of years later, monks were the only ones with any free time for
+            scholarly pursuits – and they were discouraged from thinking about the matter of
+            -secular time- for any reason beyond figuring out when to observe Easter. In the Middle
+            Ages, the study of the measure of time was first viewed as prying too deeply into God\’s
+            own affairs – and later thought of as a lowly, mechanical study, unworthy of serious
+            contemplation.\n
+            As a result, it was not until 1582, by which time Caesar\’s calendar had drifted a full
+            10 days off course, that Pope Gregory XIII (1502 - 1585) finally reformed the Julian
+            calendar. Ironically, by the time the Catholic church buckled under the weight of the
+            scientific reasoning that pointed out the error, it had lost much of its power to
+            implement the fix. Protestant tract writers responded to Gregory\’s calendar by calling
+            him the -Roman Antichrist- and claiming that its real purpose was to keep true
+            Christians from worshiping on the correct days. The -new- calendar, as we know it today,
+            was not adopted uniformly across Europe until well into the 18th century.\n
+            For more information about this topic follow the given link.\n
+
+            Link: http://www.webexhibits.org/calendars/year-history.html
+        </item>
+        <item>
+            Age Calculator\n
+            Calculate the age based on the Date of Birth and another date (default is the current
+            date).
+            It will show you your age with year(s), month(s) and day(s).
+        </item>
+        <item>
+            Date Converter:\n
+            Convert your english date in bengali date.
+        </item>
+        <item>Share App:\n
+            If you enjoy this app, you can share this app link to your friends via your installed
+            app.
+        </item>
+        <item>FeedBack:\n
+            If you have any complain, suggestion or any other idea please give us your opinion and
+            accept our thanks in advance!
+        </item>
+    </array>
+
+    <string name="title_activity_main">Main Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+
+</resources>

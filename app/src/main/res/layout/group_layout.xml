@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/groupText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="#A1EEF8"
+        android:gravity="center_vertical"
+        android:paddingLeft="?android:expandableListPreferredItemPaddingLeft"
+        android:text="Test"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+</LinearLayout>
