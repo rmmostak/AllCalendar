@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,14 +50,18 @@ public class FeedBack extends AppCompatActivity {
                     String strName=name.getText().toString().trim();
                     String strText=text.getText().toString().trim();
 
-                    Intent intent=new Intent(Intent.ACTION_SEND);
-                    intent.setType("text/email");
+                    if (!TextUtils.isEmpty(strName) && !TextUtils.isEmpty(strText)) {
+                        Intent intent=new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/email");
 
-                    intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"rmmostak@yahoo.com"});
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback from All Calendar Mobile App");
-                    intent.putExtra(Intent.EXTRA_TEXT, "Name: "+strName+"\nMessage: "+strText);
+                        intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"rmmostak@yahoo.com"});
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback from All Calendar Mobile App");
+                        intent.putExtra(Intent.EXTRA_TEXT, "Name: "+strName+"\nMessage: "+strText);
 
-                    startActivity(Intent.createChooser(intent, "Send feedback using..."));
+                        startActivity(Intent.createChooser(intent, "Send feedback using..."));
+                    } else {
+                        Toast.makeText(FeedBack.this, "Please fill the input and try again!", Toast.LENGTH_SHORT).show();
+                    }
 
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "Exception: "+e, Toast.LENGTH_SHORT).show();

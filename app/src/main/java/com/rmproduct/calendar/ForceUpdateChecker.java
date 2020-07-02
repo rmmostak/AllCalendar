@@ -36,8 +36,7 @@ public class ForceUpdateChecker {
     }
 
     public void check() {
-
-        FirebaseApp.initializeApp(context);
+        FirebaseApp.getInstance().getApplicationContext();
         final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.getInstance();
 
         if (remoteConfig.getBoolean(KEY_UPDATE_REQUIRED)) {
@@ -87,7 +86,6 @@ public class ForceUpdateChecker {
 
         public ForceUpdateChecker check() {
             ForceUpdateChecker forceUpdateChecker = build();
-
             forceUpdateChecker.check();
 
             return forceUpdateChecker;

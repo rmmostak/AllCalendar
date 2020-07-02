@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="80dp"
+    android:viewportWidth="504"
+    android:viewportHeight="360">
+    <path
+        android:name="Ellipse 1"
+        android:fillColor="#b5dafd"
+        android:pathData="m242.5 52c70.4 0 127.5 57.1 127.5 127.5c0 70.4 -57.1 127.5 -127.5 127.5c-70.4 0 -127.5 -57.1 -127.5 -127.5c0 -70.4 57.1 -127.5 127.5 -127.5z" />
+    <path
+        android:name="Rectangle 1"
+        android:fillColor="#005b7f"
+        android:pathData="m169 109h31.3v140h-31.3v-140z" />
+    <path
+        android:name="Rectangle 1 copy"
+        android:fillColor="#005b7f"
+        android:pathData="m316 109v29h-144.6v-29h144.6z" />
+    <path
+        android:name="Rectangle 2"
+        android:fillColor="#005b7f"
+        android:pathData="m219.6 145.2h28.9v103.8h-28.9v-103.8z" />
+    <path
+        android:name="Rectangle 2 copy"
+        android:fillColor="#005b7f"
+        android:pathData="m287.1 145.2h28.9v103.8h-28.9v-103.8z" />
+    <path
+        android:name="Rectangle 2 copy 2"
+        android:fillColor="#005b7f"
+        android:pathData="m311.2 145.2v24.1h-91.6v-24.1h91.6z" />
+</vector>

@@ -1,15 +1,18 @@
 package com.rmproduct.calendar;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.icu.util.IslamicCalendar;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
@@ -19,7 +22,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.FirebaseApp;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -28,6 +30,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,18 +48,20 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        FirebaseApp.initializeApp(this);
         ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                calendarDialog();
+
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -97,6 +102,28 @@ public class MainActivity extends AppCompatActivity
 
         englishHeading.setTypeface(englishFont);
         englishDate.setTypeface(englishFont);
+    }
+
+    private void calendarDialog() {
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater=getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.calendar_dialog, null);
+
+        dialogBuilder.setView(dialogView);
+
+        final AlertDialog alertDialog=dialogBuilder.create();
+
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+
+        dialogBuilder.setTitle("Calendar "+year);
+
+        dialogBuilder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        }).show();
     }
 
     private String pickDate() {
@@ -422,6 +449,7 @@ public class MainActivity extends AppCompatActivity
         return (day + " " + strMonth + " " + year);
     }
 
+
     @Override
     public void onUpdateNeeded(final String updateUrl) {
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -436,7 +464,7 @@ public class MainActivity extends AppCompatActivity
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
 
-                                //redirectStore(updateUrl);
+                                redirectStore(updateUrl);
                                 //Toast.makeText(getApplicationContext(), "This is the link for update", Toast.LENGTH_LONG).show();
                             }
                         }).setNegativeButton("No, thanks",
@@ -500,7 +528,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this, AgeCalculation.class));
         } else if (id == R.id.dateConversion) {
 
-            startActivity(new Intent(MainActivity.this, DateConversion.class));
+            Toast.makeText(getApplicationContext(), "This service is currently not available. Keep using and update app to get more services. Thank you!", Toast.LENGTH_LONG).show();
+
+            //startActivity(new Intent(MainActivity.this, DateConversion.class));
 
         } else if (id == R.id.share) {
 
