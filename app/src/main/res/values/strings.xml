@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Calendar</string>
+    <string name="app_name">All Calendar</string>
 
     <array name="day">
         <item>Day</item>
@@ -149,6 +149,7 @@
             CSE-16, JUST.
         </item>
         <item>
+            To get more functions connect to the internet and update your app.
             For more needed app please contact with us-\n
             Email: rnniyajul@gmail.com (Initiator)\n
             Email: rmmostak@gmail.com (Developer)\n
@@ -271,9 +272,10 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 
 </resources>

@@ -1,114 +1,66 @@
 package com.rmproduct.calendar;
 
-import android.content.DialogInterface;
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProvider;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.icu.util.IslamicCalendar;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import android.view.LayoutInflater;
-import android.view.View;
+import android.widget.RemoteViews;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-
-import android.view.MenuItem;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-import android.widget.TextView;
-import android.widget.Toast;
+import me.grantland.widget.AutofitTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import me.grantland.widget.AutofitTextView;
-
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ForceUpdateChecker.OnUpdateNeededListener {
-
-    private TextView banglaDate, englishDate, arabicDate, day;
+public class CalendarWidget extends AppWidgetProvider {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        // There may be multiple widgets active, so update all of them
 
-        ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
+        for (int appWidgetId : appWidgetIds) {
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.calendar_widget);
 
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                calendarDialog();
-
-            }
-        });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+            views.setTextViewText((R.id.day), "AvR " + pickBanglaDay());
+            views.setTextViewText(R.id.banglaDate, pickBanglaDate());
+            views.setTextViewText(R.id.arabicDate, pickArabicDate());
+            views.setTextViewText(R.id.englishDate, pickDate());
 
 
-        banglaDate = findViewById(R.id.idBanglaDate);
-        englishDate = findViewById(R.id.idEnglisDate);
-        arabicDate = findViewById(R.id.idArabicDate);
-        day = findViewById(R.id.idDay);
+            //create pending activity on click the view(RelativeLayout)
+            Intent intentUpdate = new Intent(context, MainActivity.class);
+            intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
 
+            int[] idArray = new int[]{appWidgetId};
 
-        day.setText("AvR " + pickBanglaDay());
+            intentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
 
-        englishDate.setText(pickDate());
+            PendingIntent pendingUpdate = PendingIntent.getBroadcast(
+                    context, appWidgetId, intentUpdate,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
 
-        banglaDate.setText(pickBanglaDate());
+            views.setOnClickPendingIntent(R.id.root, pendingUpdate);
 
-        arabicDate.setText(pickArabicDate());
+            appWidgetManager.updateAppWidget(appWidgetId, views);
 
+        }
     }
 
-    private void calendarDialog() {
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.calendar_dialog, null);
-
-        dialogBuilder.setView(dialogView);
-
-        final AlertDialog alertDialog = dialogBuilder.create();
-
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-
-        dialogBuilder.setTitle("Calendar " + year);
-
-        dialogBuilder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                alertDialog.dismiss();
-            }
-        }).show();
+    @Override
+    public void onEnabled(Context context) {
+        // Enter relevant functionality for when the first widget is created
     }
+
+    @Override
+    public void onDisabled(Context context) {
+        // Enter relevant functionality for when the last widget is disabled
+    }
+
 
     private String pickDate() {
 
@@ -410,113 +362,5 @@ public class MainActivity extends AppCompatActivity
         return (day + " " + strMonth + " " + year);
     }
 
-
-    @Override
-    public void onUpdateNeeded(final String updateUrl) {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("New version available")
-                .setMessage("Please, update this app and enjoy more functions.")
-                .setPositiveButton("Update",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateUrl));
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-
-                                redirectStore(updateUrl);
-                                //Toast.makeText(getApplicationContext(), "This is the link for update", Toast.LENGTH_LONG).show();
-                            }
-                        }).setNegativeButton("No, thanks",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                return;
-                            }
-                        }).create();
-        dialog.show();
-    }
-
-    private void redirectStore(String updateUrl) {
-        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateUrl));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.aboutApp) {
-
-            startActivity(new Intent(MainActivity.this, AboutApp.class));
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.ageCalculation) {
-            // Handle the camera action
-            startActivity(new Intent(MainActivity.this, AgeCalculation.class));
-        } else if (id == R.id.dateConversion) {
-
-            Toast.makeText(getApplicationContext(), "This service is currently not available. Keep using and update app to get more services. Thank you!", Toast.LENGTH_LONG).show();
-
-            //startActivity(new Intent(MainActivity.this, DateConversion.class));
-
-        } else if (id == R.id.share) {
-
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/plain");
-            String shareBody = "https://rmproduct121.blogspot.com/2020/06/all-calendar-android-app.html";
-            String shareSubject = "All Calendar Android App";
-
-            shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubject);
-            startActivity(Intent.createChooser(shareIntent, "Share App Using..."));
-
-        } else if (id == R.id.feedback) {
-
-            startActivity(new Intent(MainActivity.this, FeedBack.class));
-
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }
+
