@@ -224,44 +224,44 @@ public class MainActivity extends AppCompatActivity
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("August") && day <= 15) {
-
+            dayNumber = 1;
             banglaDay = 16;
+            Month = "kÖveY"; //শ্রাবণ
 
-            if (day <= 15) {
-                Month = "kÖveY"; //শ্রাবণ
-                dayNumber = 1;
-
-                for (i = dayNumber; i <= day; i++) {
-                    banglaDay = banglaDay + 1;
-                }
+            for (i = dayNumber; i <= day; i++) {
+                banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("August") && day > 15) {
+            dayNumber = 16;
             banglaDay = 1;
             Month = "fv`ª"; //ভাদ্র
-            dayNumber = 16;
+
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("September") && day <= 15) {
             Month = "fv`ª"; //ভাদ্র
-            banglaDay = 16;
             dayNumber = 1;
+            banglaDay = 16;
+
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
 
             }
         } else if (strMonth.equals("September") && day > 15) {
             Month = "Avwk¦b"; //আশ্বিন
+            dayNumber = 16;
             banglaDay = 1;
-            dayNumber = 1;
+
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
 
             }
         } else if (strMonth.equals("October") && day <= 16) {
             Month = "Avwk¦b"; //আশ্বিন
-            banglaDay = 17;
+
             dayNumber = 1;
+            banglaDay = 17;
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
 
