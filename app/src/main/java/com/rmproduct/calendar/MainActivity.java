@@ -308,7 +308,7 @@ public class MainActivity extends AppCompatActivity
             Month = "‡cŠl"; //পৌষ
             banglaYear = banglaYear - 1;
             dayNumber = 1;
-            banglaDay = 15;
+            banglaDay = 17; //for 15
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
 
