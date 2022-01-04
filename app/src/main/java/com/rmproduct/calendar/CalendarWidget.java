@@ -6,14 +6,17 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.util.IslamicCalendar;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.widget.RemoteViews;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class CalendarWidget extends AppWidgetProvider {
+
+    private static final String MyOnClick = "myOnClickTag";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -23,16 +26,16 @@ public class CalendarWidget extends AppWidgetProvider {
 
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.calendar_widget);
 
-            views.setTextViewText((R.id.day), "AvR " + pickBanglaDay());
-            views.setTextViewText(R.id.banglaDate, pickBanglaDate());
-            views.setTextViewText(R.id.arabicDate, pickArabicDate());
+            views.setTextViewText((R.id.day), context.getString(R.string.day) + pickBanglaDay(context));
+            views.setTextViewText(R.id.banglaDate, pickBanglaDate(context));
+            views.setTextViewText(R.id.arabicDate, pickArabicDate(context));
             views.setTextViewText(R.id.englishDate, pickDate());
 
 
-            //create pending activity on click the view(RelativeLayout)
-            Intent intentUpdate = new Intent(context, MainActivity.class);
-            intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            updateAppWidget(context, appWidgetManager, appWidgetId);
 
+            //create pending activity on click the view(RelativeLayout)
+            /*
             int[] idArray = new int[]{appWidgetId};
 
             intentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
@@ -43,7 +46,7 @@ public class CalendarWidget extends AppWidgetProvider {
 
             views.setOnClickPendingIntent(R.id.root, pendingUpdate);
 
-            appWidgetManager.updateAppWidget(appWidgetId, views);
+            appWidgetManager.updateAppWidget(appWidgetId, views);*/
 
         }
     }
@@ -58,6 +61,35 @@ public class CalendarWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
+    protected PendingIntent getPendingSelfIntent(Context context, String action) {
+        Intent intent = new Intent(context, getClass());
+        intent.setAction(action);
+        return PendingIntent.getBroadcast(context, 0, intent, 0);
+    }
+
+    void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                         int appWidgetId) {
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.calendar_widget);
+        //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.calendar_widget);
+
+        views.setTextViewText((R.id.day), context.getString(R.string.day) +" "+ pickBanglaDay(context));
+        views.setTextViewText(R.id.banglaDate, pickBanglaDate(context));
+        views.setTextViewText(R.id.arabicDate, pickArabicDate(context));
+        views.setTextViewText(R.id.englishDate, pickDate());
+        views.setOnClickPendingIntent(R.id.root, getPendingSelfIntent(context, MyOnClick));
+
+        appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        if (MyOnClick.equals(intent.getAction())) {
+            Intent intentUpdate = new Intent(context, MainActivity.class);
+            intentUpdate.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intentUpdate);//intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        }
+    }
 
     private String pickDate() {
 
@@ -68,7 +100,7 @@ public class CalendarWidget extends AppWidgetProvider {
         return strDate;
     }
 
-    private String pickBanglaDay() {
+    private String pickBanglaDay(Context context) {
 
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("E", Locale.getDefault());
@@ -76,25 +108,24 @@ public class CalendarWidget extends AppWidgetProvider {
         String strBanglaDay = "";
 
         if (strDay.equals("Sat")) {
-            strBanglaDay = "kwbevi";
+            strBanglaDay = context.getString(R.string.sat);
         } else if (strDay.equals("Sun")) {
-            strBanglaDay = "iweevi";
+            strBanglaDay = context.getString(R.string.sun);
         } else if (strDay.equals("Mon")) {
-            strBanglaDay = "‡mvgevi";
+            strBanglaDay = context.getString(R.string.mon);
         } else if (strDay.equals("Tue")) {
-            strBanglaDay = "g½jevi";
+            strBanglaDay = context.getString(R.string.tue);
         } else if (strDay.equals("Wed")) {
-            strBanglaDay = "eyaevi";
+            strBanglaDay = context.getString(R.string.wed);
         } else if (strDay.equals("Thu")) {
-            strBanglaDay = "e„n¯úwZevi";
+            strBanglaDay = context.getString(R.string.thu);
         } else if (strDay.equals("Fri")) {
-            strBanglaDay = "ïµevi";
+            strBanglaDay = context.getString(R.string.fri);
         }
-
         return strBanglaDay;
     }
 
-    private String pickBanglaDate() {
+    private String pickBanglaDate(Context context) {
 
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -110,7 +141,7 @@ public class CalendarWidget extends AppWidgetProvider {
         banglaYear = year - 593;
 
         if (strMonth.equals("April") && day <= 13) {
-            Month = "‰PÎ"; //চৈত্র
+            Month = context.getString(R.string.april); //চৈত্র
             banglaYear = banglaYear - 1;
             dayNumber = 1;
             banglaDay = 14;
@@ -118,14 +149,14 @@ public class CalendarWidget extends AppWidgetProvider {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("April") && day > 13) {
-            Month = "‰ekvL"; //বৈশাখ
+            Month = context.getString(R.string.boishakh); //বৈশাখ
             dayNumber = 14;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("May") && day <= 14) {
-            Month = "‰ekvL"; //বৈশাখ
+            Month = context.getString(R.string.boishakh2); //বৈশাখ
             dayNumber = 1;
             banglaDay = 15;
             for (i = dayNumber; i > day; i++) {
@@ -133,14 +164,14 @@ public class CalendarWidget extends AppWidgetProvider {
 
             }
         } else if (strMonth.equals("May") && day > 14) {
-            Month = "‰Rô¨"; //জৈষ্ঠ্য
+            Month = context.getString(R.string.jaistho); //জৈষ্ঠ্য
             dayNumber = 15;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("June") && day <= 14) {
-            Month = "‰Rô¨"; //জৈষ্ঠ্য
+            Month = context.getString(R.string.jaistho2); //জৈষ্ঠ্য
             dayNumber = 1;
             banglaDay = 15;
             for (i = dayNumber; i > day; i++) {
@@ -148,7 +179,7 @@ public class CalendarWidget extends AppWidgetProvider {
 
             }
         } else if (strMonth.equals("June") && day > 14) {
-            Month = "Avlvp"; //আষাঢ়
+            Month = context.getString(R.string.ashar); //আষাঢ়
             dayNumber = 15;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
@@ -156,7 +187,7 @@ public class CalendarWidget extends AppWidgetProvider {
             }
         } else if (strMonth.equals("July") && day <= 15) {
 
-            Month = "Avlvp"; //আষাঢ়
+            Month = context.getString(R.string.ashar2); //আষাঢ়
             dayNumber = 1;
             banglaDay = 16;
             for (i = dayNumber; i < day; i++) {
@@ -166,7 +197,7 @@ public class CalendarWidget extends AppWidgetProvider {
             }
 
         } else if (strMonth.equals("July") && day > 15) {
-            Month = "kÖveY"; //শ্রাবণ
+            Month = context.getString(R.string.srabon); //শ্রাবণ
             dayNumber = 16;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
@@ -175,7 +206,7 @@ public class CalendarWidget extends AppWidgetProvider {
         } else if (strMonth.equals("August") && day <= 15) {
             dayNumber = 1;
             banglaDay = 16;
-            Month = "kÖveY"; //শ্রাবণ
+            Month = context.getString(R.string.srabon2); //শ্রাবণ
 
             for (i = dayNumber; i <= day; i++) {
                 banglaDay = banglaDay + 1;
@@ -183,13 +214,13 @@ public class CalendarWidget extends AppWidgetProvider {
         } else if (strMonth.equals("August") && day > 15) {
             dayNumber = 16;
             banglaDay = 1;
-            Month = "fv`ª"; //ভাদ্র
+            Month = context.getString(R.string.vadro); //ভাদ্র
 
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("September") && day <= 15) {
-            Month = "fv`ª"; //ভাদ্র
+            Month = context.getString(R.string.vadro2); //ভাদ্র
             dayNumber = 1;
             banglaDay = 16;
 
@@ -198,7 +229,7 @@ public class CalendarWidget extends AppWidgetProvider {
 
             }
         } else if (strMonth.equals("September") && day > 15) {
-            Month = "Avwk¦b"; //আশ্বিন
+            Month = context.getString(R.string.ashwin); //আশ্বিন
             dayNumber = 16;
             banglaDay = 1;
 
@@ -207,7 +238,7 @@ public class CalendarWidget extends AppWidgetProvider {
 
             }
         } else if (strMonth.equals("October") && day <= 16) {
-            Month = "Avwk¦b"; //আশ্বিন
+            Month = context.getString(R.string.ashwin2); //আশ্বিন
 
             dayNumber = 1;
             banglaDay = 17;
@@ -216,14 +247,14 @@ public class CalendarWidget extends AppWidgetProvider {
 
             }
         } else if (strMonth.equals("October") && day > 16) {
-            Month = "KvwË©K"; //কার্ত্তিক
+            Month = context.getString(R.string.kartik); //কার্ত্তিক
             dayNumber = 17;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("November") && day <= 15) {
-            Month = "KvwË©K"; //কার্ত্তিক
+            Month = context.getString(R.string.kartik2); //কার্ত্তিক
             dayNumber = 1;
             banglaDay = 16;
             for (i = dayNumber; i < day; i++) {
@@ -232,7 +263,7 @@ public class CalendarWidget extends AppWidgetProvider {
             }
 
         } else if (strMonth.equals("November") && day > 15) {
-            Month = "AMÖnvqY"; //অগ্রহায়ণ
+            Month = context.getString(R.string.agun); //অগ্রহায়ণ
             dayNumber = 16;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
@@ -240,21 +271,21 @@ public class CalendarWidget extends AppWidgetProvider {
             }
         } else if (strMonth.equals("December") && day <= 15) {
 
-            Month = "AMÖnvqY"; //অগ্রহায়ণ
+            Month = context.getString(R.string.agun2); //অগ্রহায়ণ
             dayNumber = 1;
             banglaDay = 16;
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("December") && day > 15) {
-            Month = "‡cŠl"; //পৌষ
+            Month = context.getString(R.string.poush); //পৌষ
             dayNumber = 16;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("January") && day <= 14) {
-            Month = "‡cŠl"; //পৌষ
+            Month = context.getString(R.string.poush2); //পৌষ
             banglaYear = banglaYear - 1;
             dayNumber = 1;
             banglaDay = 17; //for 15
@@ -263,7 +294,7 @@ public class CalendarWidget extends AppWidgetProvider {
 
             }
         } else if (strMonth.equals("January") && day > 14) {
-            Month = "gvN"; //মাঘ
+            Month = context.getString(R.string.magh); //মাঘ
             banglaYear = banglaYear - 1;
             dayNumber = 15;
             banglaDay = 1;
@@ -271,7 +302,7 @@ public class CalendarWidget extends AppWidgetProvider {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("February") && day <= 13) {
-            Month = "gvN"; //মাঘ
+            Month = context.getString(R.string.magh2); //মাঘ
             banglaYear = banglaYear - 1;
             dayNumber = 1;
             banglaDay = 14;
@@ -280,7 +311,7 @@ public class CalendarWidget extends AppWidgetProvider {
 
             }
         } else if (strMonth.equals("February") && day > 13) {
-            Month = "dvêyb"; //ফাল্গুন
+            Month = context.getString(R.string.falgun); //ফাল্গুন
             banglaYear = banglaYear - 1;
             dayNumber = 14;
             banglaDay = 1;
@@ -288,14 +319,14 @@ public class CalendarWidget extends AppWidgetProvider {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("March") && day <= 14) {
-            Month = "dvêyb"; //ফাল্গুন
+            Month = context.getString(R.string.falgun2); //ফাল্গুন
             banglaYear = banglaYear - 1;
             dayNumber = 1;
             banglaDay = 15;
 
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
-                if (((year % 400 == 0) || (year % 100 != 0) && (year % 4 == 00))) {
+                if (((year % 400 == 0) || (year % 100 != 0) && (year % 4 == 0))) {
                     if (banglaDay > 30) {
                         banglaDay = 1;
                         break;
@@ -310,7 +341,7 @@ public class CalendarWidget extends AppWidgetProvider {
             }
 
         } else if (strMonth.equals("March") && day > 14) {
-            Month = "‰PÎ"; //চৈত্র
+            Month = context.getString(R.string.choitro); //চৈত্র
             banglaYear = banglaYear - 1;
             dayNumber = 15;
             banglaDay = 1;
@@ -322,7 +353,7 @@ public class CalendarWidget extends AppWidgetProvider {
         return ((banglaDay) + " " + Month + " " + (banglaYear));
     }
 
-    private String pickArabicDate() {
+    private String pickArabicDate(Context context) {
         IslamicCalendar c = new IslamicCalendar();
         int year = c.get(IslamicCalendar.YEAR);
         int month = c.get(IslamicCalendar.MONTH) + 1;
@@ -331,29 +362,29 @@ public class CalendarWidget extends AppWidgetProvider {
         String strMonth = "";
 
         if (month == 1) {
-            strMonth = "gyniig"; //মুহররম
+            strMonth = context.getString(R.string.muharram); //মুহররম
         } else if (month == 2) {
-            strMonth = "mdi"; //সফর
+            strMonth = context.getString(R.string.safar); //সফর
         } else if (month == 3) {
-            strMonth = "iweDj AvDqvj"; //রবিউল আউয়াল
+            strMonth = context.getString(R.string.rabi_aual); //রবিউল আউয়াল
         } else if (month == 4) {
-            strMonth = "iweDm mvwb"; //রবিউস সানি
+            strMonth = context.getString(R.string.rabi_sany); //রবিউস সানি
         } else if (month == 5) {
-            strMonth = "Rgvw`Dj AvDqvj"; //জমাদিউল আউয়াল
+            strMonth = context.getString(R.string.jama_aual); //জমাদিউল আউয়াল
         } else if (month == 6) {
-            strMonth = "Rgvw`Dm mvwb"; //জমাদিউস সানি
+            strMonth = context.getString(R.string.jama_sany); //জমাদিউস সানি
         } else if (month == 7) {
-            strMonth = "iRe"; //রজব
+            strMonth = context.getString(R.string.rajab); //রজব
         } else if (month == 8) {
-            strMonth = "kvÕevb"; //শা'বান
+            strMonth = context.getString(R.string.shaban); //শা'বান
         } else if (month == 9) {
-            strMonth = "igRvb"; //রমজান
+            strMonth = context.getString(R.string.ramadan); //রমজান
         } else if (month == 10) {
-            strMonth = "kvIqvj"; //শাওয়াল
+            strMonth = context.getString(R.string.shaoal); //শাওয়াল
         } else if (month == 11) {
-            strMonth = "wR¡jK`"; //জ্বিলকদ
+            strMonth = context.getString(R.string.zilqad); //জ্বিলকদ
         } else if (month == 12) {
-            strMonth = "wR¡jn¾"; //জ্বিলহজ্জ
+            strMonth = context.getString(R.string.zilhaz); //জ্বিলহজ্জ
         }
 
         return (day + " " + strMonth + " " + year);

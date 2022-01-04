@@ -54,6 +54,7 @@
 
     <array name="year">
         <item>Year</item>
+        <item>"2021"</item>
         <item>"2020"</item>
         <item>"2019"</item>
         <item>"2018"</item>
@@ -266,16 +267,60 @@
         </item>
     </array>
 
-    <string name="title_activity_main">Main Activity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="title_activity_main" translatable="false">Main Activity</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings" translatable="false">Settings</string>
 
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="menu_share" translatable="false">Share</string>
+    <string name="menu_send" translatable="false">Send</string>
+    <string name="appwidget_text" translatable="false">EXAMPLE</string>
+    <string name="add_widget" translatable="false">Add widget</string>
+    <string name="day" translatable="false">AvR</string>
+    <string name="sat" translatable="false">kwbevi</string>
+    <string name="sun" translatable="false">iweevi</string>
+    <string name="thu" translatable="false">e„n¯úwZevi</string>
+    <string name="fri" translatable="false">ïµevi</string>
+    <string name="wed" translatable="false">eyaevi</string>
+    <string name="tue" translatable="false">g½jevi</string>
+    <string name="mon" translatable="false">‡mvgevi</string>
+    <string name="april" translatable="false">‰PÎ</string>
+    <string name="boishakh" translatable="false">‰ekvL</string>
+    <string name="boishakh2" translatable="false">‰ekvL</string>
+    <string name="jaistho" translatable="false">‰Rô¨</string>
+    <string name="jaistho2" translatable="false">‰Rô¨</string>
+    <string name="ashar" translatable="false">Avlvp</string>
+    <string name="ashar2" translatable="false">Avlvp</string>
+    <string name="srabon" translatable="false">kÖveY</string>
+    <string name="srabon2" translatable="false">kÖveY</string>
+    <string name="vadro" translatable="false">fv`ª</string>
+    <string name="vadro2" translatable="false">fv`ª</string>
+    <string name="ashwin" translatable="false">Avwk¦b</string>
+    <string name="ashwin2" translatable="false">Avwk¦b</string>
+    <string name="kartik" translatable="false">KvwË©K</string>
+    <string name="kartik2" translatable="false">KvwË©K</string>
+    <string name="agun" translatable="false">AMÖnvqY</string>
+    <string name="agun2" translatable="false">AMÖnvqY</string>
+    <string name="poush" translatable="false">‡cŠl</string>
+    <string name="poush2" translatable="false">‡cŠl</string>
+    <string name="magh" translatable="false">gvN</string>
+    <string name="magh2" translatable="false">gvN</string>
+    <string name="falgun" translatable="false">dvêyb</string>
+    <string name="falgun2" translatable="false">dvêyb</string>
+    <string name="choitro" translatable="false">‰PÎ</string>
+    <string name="muharram" translatable="false">gyniig</string>
+    <string name="safar" translatable="false">mdi</string>
+    <string name="rabi_aual" translatable="false">iweDj AvDqvj</string>
+    <string name="rabi_sany" translatable="false">iweDm mvwb</string>
+    <string name="jama_aual" translatable="false">Rgvw`Dj AvDqvj</string>
+    <string name="jama_sany" translatable="false">Rgvw`Dm mvwb</string>
+    <string name="rajab" translatable="false">iRe</string>
+    <string name="shaban" translatable="false">kvÕevb</string>
+    <string name="ramadan" translatable="false">igRvb</string>
+    <string name="shaoal" translatable="false">kvIqvj</string>
+    <string name="zilqad" translatable="false">wR¡jK`</string>
+    <string name="zilhaz" translatable="false">wR¡jn¾</string>
 
 
 </resources>

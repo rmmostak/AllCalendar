@@ -28,7 +28,7 @@ public class App extends Application {
         Map<String, Object> remoteConfigDefaults = new HashMap();
         remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_REQUIRED, false);
         remoteConfigDefaults.put(ForceUpdateChecker.KEY_CURRENT_VERSION, "1.0");
-        remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_URL, "https://rmproduct121.blogspot.com/2020/06/all-calendar-android-app.html");
+        remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_URL, "https://play.google.com/store/apps/details?id=com.rmproduct.calendar");
 
         firebaseRemoteConfig.setDefaults(remoteConfigDefaults);
         firebaseRemoteConfig.fetch(60) // fetch every minutes

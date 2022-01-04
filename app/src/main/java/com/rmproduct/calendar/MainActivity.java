@@ -2,6 +2,7 @@ package com.rmproduct.calendar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.icu.util.IslamicCalendar;
 import android.net.ConnectivityManager;
@@ -46,6 +47,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String languageToLoad  = "en"; // your language
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
         setContentView(R.layout.activity_main);
 
         ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
@@ -78,7 +86,7 @@ public class MainActivity extends AppCompatActivity
         day = findViewById(R.id.idDay);
 
 
-        day.setText("AvR " + pickBanglaDay());
+        day.setText(getString(R.string.day) + pickBanglaDay());
 
         englishDate.setText(pickDate());
 
@@ -127,19 +135,19 @@ public class MainActivity extends AppCompatActivity
         String strBanglaDay = "";
 
         if (strDay.equals("Sat")) {
-            strBanglaDay = "kwbevi";
+            strBanglaDay = getString(R.string.sat);
         } else if (strDay.equals("Sun")) {
-            strBanglaDay = "iweevi";
+            strBanglaDay = getString(R.string.sun);
         } else if (strDay.equals("Mon")) {
-            strBanglaDay = "‡mvgevi";
+            strBanglaDay = getString(R.string.mon);
         } else if (strDay.equals("Tue")) {
-            strBanglaDay = "g½jevi";
+            strBanglaDay = getString(R.string.tue);
         } else if (strDay.equals("Wed")) {
-            strBanglaDay = "eyaevi";
+            strBanglaDay = getString(R.string.wed);
         } else if (strDay.equals("Thu")) {
-            strBanglaDay = "e„n¯úwZevi";
+            strBanglaDay = getString(R.string.thu);
         } else if (strDay.equals("Fri")) {
-            strBanglaDay = "ïµevi";
+            strBanglaDay = getString(R.string.fri);
         }
 
         return strBanglaDay;
@@ -161,7 +169,7 @@ public class MainActivity extends AppCompatActivity
         banglaYear = year - 593;
 
         if (strMonth.equals("April") && day <= 13) {
-            Month = "‰PÎ"; //চৈত্র
+            Month = getString(R.string.april); //চৈত্র
             banglaYear = banglaYear - 1;
             dayNumber = 1;
             banglaDay = 14;
@@ -169,14 +177,14 @@ public class MainActivity extends AppCompatActivity
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("April") && day > 13) {
-            Month = "‰ekvL"; //বৈশাখ
+            Month = getString(R.string.boishakh); //বৈশাখ
             dayNumber = 14;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("May") && day <= 14) {
-            Month = "‰ekvL"; //বৈশাখ
+            Month = getString(R.string.boishakh2); //বৈশাখ
             dayNumber = 1;
             banglaDay = 15;
             for (i = dayNumber; i > day; i++) {
@@ -184,14 +192,14 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (strMonth.equals("May") && day > 14) {
-            Month = "‰Rô¨"; //জৈষ্ঠ্য
+            Month = getString(R.string.jaistho); //জৈষ্ঠ্য
             dayNumber = 15;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("June") && day <= 14) {
-            Month = "‰Rô¨"; //জৈষ্ঠ্য
+            Month = getString(R.string.jaistho2); //জৈষ্ঠ্য
             dayNumber = 1;
             banglaDay = 15;
             for (i = dayNumber; i > day; i++) {
@@ -199,7 +207,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (strMonth.equals("June") && day > 14) {
-            Month = "Avlvp"; //আষাঢ়
+            Month = getString(R.string.ashar); //আষাঢ়
             dayNumber = 15;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
@@ -207,7 +215,7 @@ public class MainActivity extends AppCompatActivity
             }
         } else if (strMonth.equals("July") && day <= 15) {
 
-            Month = "Avlvp"; //আষাঢ়
+            Month = getString(R.string.ashar2); //আষাঢ়
             dayNumber = 1;
             banglaDay = 16;
             for (i = dayNumber; i < day; i++) {
@@ -217,7 +225,7 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (strMonth.equals("July") && day > 15) {
-            Month = "kÖveY"; //শ্রাবণ
+            Month = getString(R.string.srabon); //শ্রাবণ
             dayNumber = 16;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
@@ -226,7 +234,7 @@ public class MainActivity extends AppCompatActivity
         } else if (strMonth.equals("August") && day <= 15) {
             dayNumber = 1;
             banglaDay = 16;
-            Month = "kÖveY"; //শ্রাবণ
+            Month = getString(R.string.srabon2); //শ্রাবণ
 
             for (i = dayNumber; i <= day; i++) {
                 banglaDay = banglaDay + 1;
@@ -234,13 +242,13 @@ public class MainActivity extends AppCompatActivity
         } else if (strMonth.equals("August") && day > 15) {
             dayNumber = 16;
             banglaDay = 1;
-            Month = "fv`ª"; //ভাদ্র
+            Month = getString(R.string.vadro); //ভাদ্র
 
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("September") && day <= 15) {
-            Month = "fv`ª"; //ভাদ্র
+            Month = getString(R.string.vadro2); //ভাদ্র
             dayNumber = 1;
             banglaDay = 16;
 
@@ -249,7 +257,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (strMonth.equals("September") && day > 15) {
-            Month = "Avwk¦b"; //আশ্বিন
+            Month = getString(R.string.ashwin); //আশ্বিন
             dayNumber = 16;
             banglaDay = 1;
 
@@ -258,7 +266,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (strMonth.equals("October") && day <= 16) {
-            Month = "Avwk¦b"; //আশ্বিন
+            Month = getString(R.string.ashwin2); //আশ্বিন
 
             dayNumber = 1;
             banglaDay = 17;
@@ -267,14 +275,14 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (strMonth.equals("October") && day > 16) {
-            Month = "KvwË©K"; //কার্ত্তিক
+            Month = getString(R.string.kartik); //কার্ত্তিক
             dayNumber = 17;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("November") && day <= 15) {
-            Month = "KvwË©K"; //কার্ত্তিক
+            Month = getString(R.string.kartik2); //কার্ত্তিক
             dayNumber = 1;
             banglaDay = 16;
             for (i = dayNumber; i < day; i++) {
@@ -283,7 +291,7 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (strMonth.equals("November") && day > 15) {
-            Month = "AMÖnvqY"; //অগ্রহায়ণ
+            Month = getString(R.string.agun); //অগ্রহায়ণ
             dayNumber = 16;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
@@ -291,21 +299,21 @@ public class MainActivity extends AppCompatActivity
             }
         } else if (strMonth.equals("December") && day <= 15) {
 
-            Month = "AMÖnvqY"; //অগ্রহায়ণ
+            Month = getString(R.string.agun2); //অগ্রহায়ণ
             dayNumber = 1;
             banglaDay = 16;
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("December") && day > 15) {
-            Month = "‡cŠl"; //পৌষ
+            Month = getString(R.string.poush); //পৌষ
             dayNumber = 16;
             banglaDay = 1;
             for (i = dayNumber; i < day; i++) {
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("January") && day <= 14) {
-            Month = "‡cŠl"; //পৌষ
+            Month = getString(R.string.poush2); //পৌষ
             banglaYear = banglaYear - 1;
             dayNumber = 1;
             banglaDay = 17; //for 15
@@ -314,7 +322,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (strMonth.equals("January") && day > 14) {
-            Month = "gvN"; //মাঘ
+            Month = getString(R.string.magh); //মাঘ
             banglaYear = banglaYear - 1;
             dayNumber = 15;
             banglaDay = 1;
@@ -322,7 +330,7 @@ public class MainActivity extends AppCompatActivity
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("February") && day <= 13) {
-            Month = "gvN"; //মাঘ
+            Month = getString(R.string.magh2); //মাঘ
             banglaYear = banglaYear - 1;
             dayNumber = 1;
             banglaDay = 14;
@@ -331,7 +339,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (strMonth.equals("February") && day > 13) {
-            Month = "dvêyb"; //ফাল্গুন
+            Month = getString(R.string.falgun); //ফাল্গুন
             banglaYear = banglaYear - 1;
             dayNumber = 14;
             banglaDay = 1;
@@ -339,7 +347,7 @@ public class MainActivity extends AppCompatActivity
                 banglaDay = banglaDay + 1;
             }
         } else if (strMonth.equals("March") && day <= 14) {
-            Month = "dvêyb"; //ফাল্গুন
+            Month = getString(R.string.falgun2); //ফাল্গুন
             banglaYear = banglaYear - 1;
             dayNumber = 1;
             banglaDay = 15;
@@ -361,7 +369,7 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (strMonth.equals("March") && day > 14) {
-            Month = "‰PÎ"; //চৈত্র
+            Month = getString(R.string.choitro); //চৈত্র
             banglaYear = banglaYear - 1;
             dayNumber = 15;
             banglaDay = 1;
@@ -382,34 +390,33 @@ public class MainActivity extends AppCompatActivity
         String strMonth = "";
 
         if (month == 1) {
-            strMonth = "gyniig"; //মুহররম
+            strMonth = getString(R.string.muharram); //মুহররম
         } else if (month == 2) {
-            strMonth = "mdi"; //সফর
+            strMonth = getString(R.string.safar); //সফর
         } else if (month == 3) {
-            strMonth = "iweDj AvDqvj"; //রবিউল আউয়াল
+            strMonth = getString(R.string.rabi_aual); //রবিউল আউয়াল
         } else if (month == 4) {
-            strMonth = "iweDm mvwb"; //রবিউস সানি
+            strMonth = getString(R.string.rabi_sany); //রবিউস সানি
         } else if (month == 5) {
-            strMonth = "Rgvw`Dj AvDqvj"; //জমাদিউল আউয়াল
+            strMonth = getString(R.string.jama_aual); //জমাদিউল আউয়াল
         } else if (month == 6) {
-            strMonth = "Rgvw`Dm mvwb"; //জমাদিউস সানি
+            strMonth = getString(R.string.jama_sany); //জমাদিউস সানি
         } else if (month == 7) {
-            strMonth = "iRe"; //রজব
+            strMonth = getString(R.string.rajab); //রজব
         } else if (month == 8) {
-            strMonth = "kvÕevb"; //শা'বান
+            strMonth = getString(R.string.shaban); //শা'বান
         } else if (month == 9) {
-            strMonth = "igRvb"; //রমজান
+            strMonth = getString(R.string.ramadan); //রমজান
         } else if (month == 10) {
-            strMonth = "kvIqvj"; //শাওয়াল
+            strMonth = getString(R.string.shaoal); //শাওয়াল
         } else if (month == 11) {
-            strMonth = "wR¡jK`"; //জ্বিলকদ
+            strMonth = getString(R.string.zilqad); //জ্বিলকদ
         } else if (month == 12) {
-            strMonth = "wR¡jn¾"; //জ্বিলহজ্জ
+            strMonth = getString(R.string.zilhaz); //জ্বিলহজ্জ
         }
 
         return (day + " " + strMonth + " " + year);
     }
-
 
     @Override
     public void onUpdateNeeded(final String updateUrl) {
@@ -443,7 +450,6 @@ public class MainActivity extends AppCompatActivity
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -497,7 +503,7 @@ public class MainActivity extends AppCompatActivity
 
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            String shareBody = "https://rmproduct121.blogspot.com/2020/06/all-calendar-android-app.html";
+            String shareBody = "https://play.google.com/store/apps/details?id=com.rmproduct.calendar";
             String shareSubject = "All Calendar Android App";
 
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
