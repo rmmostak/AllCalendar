@@ -56,10 +56,11 @@
             <EditText
                 android:id="@+id/text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:hint="Text"
                 android:inputType="text"
                 android:lineHeight="50dp"
+                android:minLines="5"
                 android:lines="5"
                 android:maxLines="10"
                 android:textColorHint="@color/colorPrimaryDark"

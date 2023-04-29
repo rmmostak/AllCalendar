@@ -54,6 +54,7 @@
 
     <array name="year">
         <item>Year</item>
+        <item>"2022"</item>
         <item>"2021"</item>
         <item>"2020"</item>
         <item>"2019"</item>
@@ -145,7 +146,7 @@
             Initiator:\n
             Md. Niyajul Islam\n
             B.Sc. Manda Govt. College\n\n
-            Design and Development:\n
+            Design &amp; Development:\n
             Mustak Ahmmed\n
             CSE-16, JUST.
         </item>
@@ -160,17 +161,17 @@
             BDNews24.com 17 October 2019, 00:00:00 | Print Edition\n
 
             Mubarak Hossain, director (research, compilation and dictionary and encyclopedia
-            department)
-            of the Bangla Academy, said that under the old rules, the five months from Boishakh to
-            Bhadra
-            were counted in 31 days. And from Ashwin to Chaitra- seven months would be 30 days.
+            department) of the Bangla Academy, said that under the old rules, the five months from
+            Boishakh to
+            Bhadra were counted in 31 days. And from Ashwin to Chaitra- seven months would be 30
+            days.
             However, in the English leap year, the month of Falgun was 31 days long. Now under the
-            new rules,
-            the first six months from Boishakh to Ashwin will be 31 days. Kartik, Agrahayan, Poush,
-            Magh and Chaitra -
-            these 5 months will be calculated in 30 days. And the month of Falgun will be calculated
-            in 29 days.
-            The year of the English leap year will increase by one day and the month of Falgun will
+            new rules, the first six months from Boishakh to Ashwin will be 31 days. Kartik,
+            Agrahayan, Poush,
+            Magh and Chaitra - these 5 months will be calculated in 30 days. And the month of Falgun
+            will be calculated
+            in 29 days. The year of the English leap year will increase by one day and the month of
+            Falgun will
             be 30 days.
             <!--নতুন বাংলা বর্ষপঞ্জি
             বিডিনিউজ টোয়েন্টিফোর ডটকম ১৭ অক্টোবর ২০১৯, ০০:০০:০০ | প্রিন্ট সংস্করণ\n
@@ -245,7 +246,7 @@
             was not adopted uniformly across Europe until well into the 18th century.\n
             For more information about this topic follow the given link.\n
 
-            Link: http://www.webexhibits.org/calendars/year-history.html
+            Reference: http://www.webexhibits.org/calendars/year-history.html
         </item>
         <item>
             Age Calculator\n
@@ -277,50 +278,49 @@
     <string name="menu_send" translatable="false">Send</string>
     <string name="appwidget_text" translatable="false">EXAMPLE</string>
     <string name="add_widget" translatable="false">Add widget</string>
-    <string name="day" translatable="false">AvR</string>
-    <string name="sat" translatable="false">kwbevi</string>
-    <string name="sun" translatable="false">iweevi</string>
-    <string name="thu" translatable="false">e„n¯úwZevi</string>
-    <string name="fri" translatable="false">ïµevi</string>
-    <string name="wed" translatable="false">eyaevi</string>
-    <string name="tue" translatable="false">g½jevi</string>
-    <string name="mon" translatable="false">‡mvgevi</string>
-    <string name="april" translatable="false">‰PÎ</string>
-    <string name="boishakh" translatable="false">‰ekvL</string>
-    <string name="boishakh2" translatable="false">‰ekvL</string>
-    <string name="jaistho" translatable="false">‰Rô¨</string>
-    <string name="jaistho2" translatable="false">‰Rô¨</string>
-    <string name="ashar" translatable="false">Avlvp</string>
-    <string name="ashar2" translatable="false">Avlvp</string>
-    <string name="srabon" translatable="false">kÖveY</string>
-    <string name="srabon2" translatable="false">kÖveY</string>
-    <string name="vadro" translatable="false">fv`ª</string>
-    <string name="vadro2" translatable="false">fv`ª</string>
-    <string name="ashwin" translatable="false">Avwk¦b</string>
-    <string name="ashwin2" translatable="false">Avwk¦b</string>
-    <string name="kartik" translatable="false">KvwË©K</string>
-    <string name="kartik2" translatable="false">KvwË©K</string>
-    <string name="agun" translatable="false">AMÖnvqY</string>
-    <string name="agun2" translatable="false">AMÖnvqY</string>
-    <string name="poush" translatable="false">‡cŠl</string>
-    <string name="poush2" translatable="false">‡cŠl</string>
-    <string name="magh" translatable="false">gvN</string>
-    <string name="magh2" translatable="false">gvN</string>
-    <string name="falgun" translatable="false">dvêyb</string>
-    <string name="falgun2" translatable="false">dvêyb</string>
-    <string name="choitro" translatable="false">‰PÎ</string>
-    <string name="muharram" translatable="false">gyniig</string>
-    <string name="safar" translatable="false">mdi</string>
-    <string name="rabi_aual" translatable="false">iweDj AvDqvj</string>
-    <string name="rabi_sany" translatable="false">iweDm mvwb</string>
-    <string name="jama_aual" translatable="false">Rgvw`Dj AvDqvj</string>
-    <string name="jama_sany" translatable="false">Rgvw`Dm mvwb</string>
-    <string name="rajab" translatable="false">iRe</string>
-    <string name="shaban" translatable="false">kvÕevb</string>
-    <string name="ramadan" translatable="false">igRvb</string>
-    <string name="shaoal" translatable="false">kvIqvj</string>
-    <string name="zilqad" translatable="false">wR¡jK`</string>
-    <string name="zilhaz" translatable="false">wR¡jn¾</string>
-
+    <string name="day" translatable="false">আজ </string>
+    <string name="sat" translatable="false">শনিবার</string>
+    <string name="sun" translatable="false">রবিবার</string>
+    <string name="mon" translatable="false">সোমবার</string>
+    <string name="tue" translatable="false">মঙ্গলবার</string>
+    <string name="wed" translatable="false">বুধবার</string>
+    <string name="thu" translatable="false">বৃহস্পতিবার</string>
+    <string name="fri" translatable="false">শুক্রবার</string>
+    <string name="april" translatable="false">এপ্রিল</string>
+    <string name="boishakh" translatable="false">বৈশাখ</string>
+    <string name="boishakh2" translatable="false">বৈশাখ</string>
+    <string name="jaistho" translatable="false">জৈষ্ঠ্য</string>
+    <string name="jaistho2" translatable="false">জৈষ্ঠ্য</string>
+    <string name="ashar" translatable="false">আষাঢ়</string>
+    <string name="ashar2" translatable="false">আষাঢ়</string>
+    <string name="srabon" translatable="false">শ্রাবণ</string>
+    <string name="srabon2" translatable="false">শ্রাবণ</string>
+    <string name="vadro" translatable="false">ভাদ্র</string>
+    <string name="vadro2" translatable="false">ভাদ্র</string>
+    <string name="ashwin" translatable="false">আশ্বিন</string>
+    <string name="ashwin2" translatable="false">আশ্বিন</string>
+    <string name="kartik" translatable="false">কার্তিক</string>
+    <string name="kartik2" translatable="false">কার্তিক</string>
+    <string name="agun" translatable="false">অগ্রহায়ণ</string>
+    <string name="agun2" translatable="false">অগ্রহায়ণ</string>
+    <string name="poush" translatable="false">পৌষ</string>
+    <string name="poush2" translatable="false">পৌষ</string>
+    <string name="magh" translatable="false">মাঘ</string>
+    <string name="magh2" translatable="false">মাঘ</string>
+    <string name="falgun" translatable="false">ফাল্গুন</string>
+    <string name="falgun2" translatable="false">ফাল্গুন</string>
+    <string name="choitro" translatable="false">চৈত্র</string>
+    <string name="muharram" translatable="false">মুহররম</string>
+    <string name="safar" translatable="false">সফর</string>
+    <string name="rabi_aual" translatable="false">রবিউল আউয়াল</string>
+    <string name="rabi_sany" translatable="false">রবিউছ ছানি</string>
+    <string name="jama_aual" translatable="false">জামাদিউল আউয়াল</string>
+    <string name="jama_sany" translatable="false">জামাদিউছ ছানি</string>
+    <string name="rajab" translatable="false">রজব</string>
+    <string name="shaban" translatable="false">শা’বান</string>
+    <string name="ramadan" translatable="false">রামাজান</string>
+    <string name="shaoal" translatable="false">শাওয়াল</string>
+    <string name="zilqad" translatable="false">জুল কাইদাহ</string>
+    <string name="zilhaz" translatable="false">জুল হিজ্জাহ</string>
 
 </resources>

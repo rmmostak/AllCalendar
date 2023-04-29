@@ -45,7 +45,6 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:fontFamily="@font/bangla_regular"
-        android:text=""
         android:textColor="#ffffff"
         android:textStyle="bold" />
 
@@ -59,8 +58,8 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="serif"
-        android:text=""
+        android:textStyle="bold"
+        android:fontFamily="@font/bangla_regular"
         android:textColor="#ffffff" />
 
 </RelativeLayout>

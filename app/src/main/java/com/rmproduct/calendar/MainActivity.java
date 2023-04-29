@@ -1,62 +1,83 @@
 package com.rmproduct.calendar;
 
+import static com.rmproduct.calendar.CalendarWidget.banglaMonth;
+
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Typeface;
+import android.content.IntentSender;
+import android.content.res.Resources;
 import android.icu.util.IslamicCalendar;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-
-import android.view.MenuItem;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import me.grantland.widget.AutofitTextView;
-
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ForceUpdateChecker.OnUpdateNeededListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private TextView banglaDate, englishDate, arabicDate, day;
+    //in app update
+    private int MY_REQUEST_CODE = 111;
+    private AppUpdateManager mAppUpdateManager;
+    private final int RC_APP_UPDATE = 999;
+    private int inAppUpdateType;
+    private com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
+    private InstallStateUpdatedListener installStateUpdatedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String languageToLoad  = "en"; // your language
-        Locale locale = new Locale(languageToLoad);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config,
-                getBaseContext().getResources().getDisplayMetrics());
         setContentView(R.layout.activity_main);
 
-        ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
+        /*start of in app update functions*/
+
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(MainActivity.this);
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+        appUpdateInfoTask.addOnSuccessListener(result -> {
+            if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                            result,
+                            AppUpdateType.IMMEDIATE,
+                            MainActivity.this,
+                            MY_REQUEST_CODE
+                    );
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        /*end of in app update function*/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         day = findViewById(R.id.idDay);
 
 
-        day.setText(getString(R.string.day) + pickBanglaDay());
+        day.setText(getString(R.string.day) + " " + pickBanglaDay());
 
         englishDate.setText(pickDate());
 
@@ -120,11 +141,16 @@ public class MainActivity extends AppCompatActivity
 
     private String pickDate() {
 
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
-        String strDate = formatter.format(date);
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH) + 1;
+        int day = c.get(Calendar.DAY_OF_MONTH);
 
-        return strDate;
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("MMMM");
+        String strMonth = formatter.format(date);
+
+        return convertToBanglaNumber(String.valueOf(day)) + " " + banglaMonth(strMonth) + " " + convertToBanglaNumber(String.valueOf(year));
     }
 
     private String pickBanglaDay() {
@@ -151,6 +177,20 @@ public class MainActivity extends AppCompatActivity
         }
 
         return strBanglaDay;
+    }
+
+    private String convertToBanglaNumber(String input) {
+        String[] numbers = {"০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"};
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            if (ch >= '0' && ch <= '9') {
+                result.append(numbers[ch - '0']);
+            } else {
+                result.append(ch);
+            }
+        }
+        return result.toString();
     }
 
     private String pickBanglaDate() {
@@ -204,7 +244,6 @@ public class MainActivity extends AppCompatActivity
             banglaDay = 15;
             for (i = dayNumber; i > day; i++) {
                 banglaDay = banglaDay + 1;
-
             }
         } else if (strMonth.equals("June") && day > 14) {
             Month = getString(R.string.ashar); //আষাঢ়
@@ -219,9 +258,7 @@ public class MainActivity extends AppCompatActivity
             dayNumber = 1;
             banglaDay = 16;
             for (i = dayNumber; i < day; i++) {
-
                 banglaDay = banglaDay + day;
-
             }
 
         } else if (strMonth.equals("July") && day > 15) {
@@ -378,7 +415,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        return ((banglaDay) + " " + Month + " " + (banglaYear));
+        return ((convertToBanglaNumber(String.valueOf(banglaDay))) + " " + Month + " " + (convertToBanglaNumber(String.valueOf(banglaYear))));
     }
 
     private String pickArabicDate() {
@@ -415,40 +452,40 @@ public class MainActivity extends AppCompatActivity
             strMonth = getString(R.string.zilhaz); //জ্বিলহজ্জ
         }
 
-        return (day + " " + strMonth + " " + year);
+        return (convertToBanglaNumber(String.valueOf(day)) + " " + strMonth + " " + convertToBanglaNumber(String.valueOf(year)));
     }
 
     @Override
-    public void onUpdateNeeded(final String updateUrl) {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("New version available")
-                .setMessage("Please, update this app and enjoy more functions.")
-                .setPositiveButton("Update",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateUrl));
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-
-                                redirectStore(updateUrl);
-                                //Toast.makeText(getApplicationContext(), "This is the link for update", Toast.LENGTH_LONG).show();
-                            }
-                        }).setNegativeButton("No, thanks",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                return;
-                            }
-                        }).create();
-        dialog.show();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MY_REQUEST_CODE) {
+            Log.d("status", "Download started");
+            popupSnackBarForCompleteUpdate();
+            if (resultCode != RESULT_OK) {
+                Log.d("result status", "download failed");
+            }
+        }
     }
 
-    private void redirectStore(String updateUrl) {
-        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateUrl));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+    private void popupSnackBarForCompleteUpdate() {
+        try {
+            Snackbar snackbar =
+                    Snackbar.make(
+                            findViewById(R.id.coordinator),
+                            "An update has just been downloaded.\nRestart to update",
+                            Snackbar.LENGTH_INDEFINITE);
+
+            snackbar.setAction("INSTALL", v -> {
+                if (mAppUpdateManager != null) {
+                    mAppUpdateManager.completeUpdate();
+                }
+            });
+            snackbar.setActionTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            snackbar.show();
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -521,8 +558,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }

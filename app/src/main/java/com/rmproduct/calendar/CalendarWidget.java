@@ -6,10 +6,10 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.util.IslamicCalendar;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -26,27 +26,12 @@ public class CalendarWidget extends AppWidgetProvider {
 
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.calendar_widget);
 
-            views.setTextViewText((R.id.day), context.getString(R.string.day) + pickBanglaDay(context));
+            views.setTextViewText((R.id.day), context.getString(R.string.day) + " " + pickBanglaDay(context));
             views.setTextViewText(R.id.banglaDate, pickBanglaDate(context));
             views.setTextViewText(R.id.arabicDate, pickArabicDate(context));
             views.setTextViewText(R.id.englishDate, pickDate());
 
-
             updateAppWidget(context, appWidgetManager, appWidgetId);
-
-            //create pending activity on click the view(RelativeLayout)
-            /*
-            int[] idArray = new int[]{appWidgetId};
-
-            intentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
-
-            PendingIntent pendingUpdate = PendingIntent.getBroadcast(
-                    context, appWidgetId, intentUpdate,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-
-            views.setOnClickPendingIntent(R.id.root, pendingUpdate);
-
-            appWidgetManager.updateAppWidget(appWidgetId, views);*/
 
         }
     }
@@ -64,7 +49,15 @@ public class CalendarWidget extends AppWidgetProvider {
     protected PendingIntent getPendingSelfIntent(Context context, String action) {
         Intent intent = new Intent(context, getClass());
         intent.setAction(action);
-        return PendingIntent.getBroadcast(context, 0, intent, 0);
+        PendingIntent pendingIntent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            pendingIntent = PendingIntent.getActivity
+                    (context, 0, intent, PendingIntent.FLAG_MUTABLE);
+        } else {
+            pendingIntent = PendingIntent.getActivity
+                    (context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        }
+        return pendingIntent;
     }
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
@@ -92,12 +85,15 @@ public class CalendarWidget extends AppWidgetProvider {
     }
 
     private String pickDate() {
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int day = c.get(Calendar.DAY_OF_MONTH);
 
         Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
-        String strDate = formatter.format(date);
+        SimpleDateFormat formatter = new SimpleDateFormat("MMMM");
+        String strMonth = formatter.format(date);
 
-        return strDate;
+        return toBangla(String.valueOf(day)) + " " + banglaMonth(strMonth) + " " + toBangla(String.valueOf(year));
     }
 
     private String pickBanglaDay(Context context) {
@@ -349,8 +345,28 @@ public class CalendarWidget extends AppWidgetProvider {
                 banglaDay = banglaDay + 1;
             }
         }
+        return (toBangla(String.valueOf(banglaDay)) + " " + Month + " " + toBangla(String.valueOf(banglaYear)));
+    }
 
-        return ((banglaDay) + " " + Month + " " + (banglaYear));
+    private String toBangla(String input) {
+        String[] numbers = {"০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"};
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            if (ch >= '0' && ch <= '9') {
+                result.append(numbers[ch - '0']);
+            } else {
+                result.append(ch);
+            }
+        }
+        return result.toString();
+    }
+
+    public static String banglaMonth(String englishMonth) {
+        String[] banglaMonths = {"জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"};
+        String[] englishMonths = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        int index = Arrays.asList(englishMonths).indexOf(englishMonth);
+        return banglaMonths[index];
     }
 
     private String pickArabicDate(Context context) {
@@ -387,7 +403,7 @@ public class CalendarWidget extends AppWidgetProvider {
             strMonth = context.getString(R.string.zilhaz); //জ্বিলহজ্জ
         }
 
-        return (day + " " + strMonth + " " + year);
+        return (toBangla(String.valueOf(day)) + " " + strMonth + " " + toBangla(String.valueOf(year)));
     }
 
 }

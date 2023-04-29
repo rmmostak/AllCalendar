@@ -38,7 +38,6 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:fontFamily="@font/bangla_regular"
-                android:text="A‡cÿv Kiæb..."
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textIsSelectable="true"
@@ -56,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:fontFamily="@font/bangla_regular"
-                    android:text="evsjv"
+                    android:text="বাংলা"
                     android:textAlignment="center"
                     android:textIsSelectable="true"
                     android:textSize="35sp" />
@@ -68,7 +67,6 @@
                     android:layout_below="@id/idBangla"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/bangla_regular"
-                    android:text="A‡cÿv Kiæb..."
                     android:textIsSelectable="true"
                     android:textSize="30sp" />
 
@@ -87,9 +85,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:fontFamily="@font/bangla_regular"
-                    android:text="Aviwe"
+                    android:text="আরবি"
                     android:textAlignment="center"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textIsSelectable="true"
                     android:textSize="35sp" />
 
@@ -100,8 +98,7 @@
                     android:layout_below="@id/idArabic"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/bangla_regular"
-                    android:text="A‡cÿv Kiæb..."
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textIsSelectable="true"
                     android:textSize="30sp" />
 
@@ -120,9 +117,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="English"
+                    android:text="ইংরেজি"
                     android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
+                    android:fontFamily="@font/bangla_regular"
                     android:textIsSelectable="true"
                     android:textSize="35sp" />
 
@@ -132,8 +130,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/idEnglish"
                     android:layout_centerInParent="true"
-                    android:text="Wait..."
-                    android:textColor="@color/colorPrimaryDark"
+                    android:fontFamily="@font/bangla_regular"
+                    android:textColor="@color/colorAccent"
                     android:textIsSelectable="true"
                     android:textSize="30sp" />
 
