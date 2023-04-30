@@ -7,7 +7,7 @@ android {
         applicationId "com.rmproduct.calendar"
         minSdkVersion 24
         targetSdkVersion 32
-        versionCode 4
+        versionCode 6
         versionName "rm.1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

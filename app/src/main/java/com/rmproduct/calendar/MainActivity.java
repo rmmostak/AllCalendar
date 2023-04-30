@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AppUpdateManager mAppUpdateManager;
     private final int RC_APP_UPDATE = 999;
     private int inAppUpdateType;
-    private com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
+    private Task<AppUpdateInfo> appUpdateInfoTask;
     private InstallStateUpdatedListener installStateUpdatedListener;
 
     @Override
