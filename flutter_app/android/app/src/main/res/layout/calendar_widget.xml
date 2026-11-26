@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp">
+
+    <TextView
+        android:id="@+id/widget_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="#ffffff"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:shadowColor="#B0000000"
+        android:shadowDx="0"
+        android:shadowDy="1"
+        android:shadowRadius="3"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/widget_bangla_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_day"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        android:shadowColor="#B0000000"
+        android:shadowDx="0"
+        android:shadowDy="1"
+        android:shadowRadius="3"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/widget_arabic_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_bangla_date"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        android:shadowColor="#B0000000"
+        android:shadowDx="0"
+        android:shadowDy="1"
+        android:shadowRadius="3"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/widget_english_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_arabic_date"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        android:shadowColor="#B0000000"
+        android:shadowDx="0"
+        android:shadowDy="1"
+        android:shadowRadius="3"
+        android:maxLines="1" />
+
+</RelativeLayout>

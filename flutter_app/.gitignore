@@ -1,0 +1,12 @@
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+*.iml
+.DS_Store
+# signing secrets: never commit
+**/local.properties
+**/key.properties
+*.jks
+*.keystore
